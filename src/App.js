@@ -9,37 +9,41 @@ class App extends React.Component {
     super(props);
     this.state = {
       userSearch: '',
-      locationData: '',
+      locationData: {},
       renderMap: false,
     };
   };
 
-  getCityInfo = async (e) => {
+  handleSubmit = (e) => {
     e.preventDefault();
-    let userSearch = e;
-    userSearch.toLowerCase();
+    let city = e.target.city.value;
     this.setState({
-      userSearch
+      userSearch: e.target.city.value,
     });
-    let locationData = await axios.get()
+    this.getCityInfo(city);
+  };
+
+  getCityInfo = async (city) => {
+    let url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_ACCESS_TOKEN}&q=${city}&format=json`;
+    let responseData = await axios.get(url)
     this.setState({
-      locationData,
+      locationData: responseData.data[0]
     })
   };
 
-  handleSubmit(e) {
-    e.preventDefault();
-    this.setState({
-      renderMap: true,
-    })
-  };
 
   render() {
     return (
       <>
-        <Header title='City Explorers' subtitle='View a map of your favorite city in real time'/>
-        <UserForm getCityInfo={this.getCityInfo} handleSubmit={this.handleSubmit}/>
-        { this.state.renderMap && <img src={this.state.locationData}/> } 
+        <Header title='City Explorers' subtitle='View a map of your favorite city in real time' />
+        <main>
+          <form onSubmit={this.handleSubmit}>
+            <label>Enter a City!
+              <input type="text" name="city"></input>
+            </label>
+            <button type="submit">Submit</button>
+          </form>
+        </main>
       </>
     )
   }

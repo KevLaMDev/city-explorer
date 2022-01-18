@@ -4,11 +4,11 @@ class UserForm extends React.Component {
 
   render() {
     return(
-    <form onSubmit={(e) => this.props.handleSubmit(e)}>
+    <form onSubmit={(e) => this.props.handleSubmit(e.target.city.value)}>
       <label>Enter a City!
-        <input type="text" name="city" onChange={(e) => this.props.getCityInfo(e.target.city.value)}></input>
+        <input type="text" name="city"></input>
       </label>
-      <button>Submit</button>
+      <button type="submit">Submit</button>
     </form>
     )
   }
