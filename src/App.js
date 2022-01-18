@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import UserForm from './UserForm';
 import Header from './Header';
-import axios from 'axios';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -10,25 +10,36 @@ class App extends React.Component {
     this.state = {
       userSearch: '',
       locationData: '',
+      renderMap: false,
     };
   };
 
-  handleSubmit = (userSearch) => {
+  getCityInfo = async (e) => {
+    e.preventDefault();
+    let userSearch = e;
     userSearch.toLowerCase();
     this.setState({
       userSearch
     });
+    let locationData = await axios.get()
+    this.setState({
+      locationData,
+    })
   };
 
-  apiCall = async () => {
-    let data = await axios.get()
-  }
+  handleSubmit(e) {
+    e.preventDefault();
+    this.setState({
+      renderMap: true,
+    })
+  };
 
   render() {
     return (
       <>
         <Header title='City Explorers' subtitle='View a map of your favorite city in real time'/>
-        <UserForm handleSubmit={this.handleSubmit}/>
+        <UserForm getCityInfo={this.getCityInfo} handleSubmit={this.handleSubmit}/>
+        { this.state.renderMap && <img src={this.state.locationData}/> } 
       </>
     )
   }
