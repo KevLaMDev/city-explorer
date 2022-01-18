@@ -42,6 +42,9 @@ class App extends React.Component {
             </label>
             <button type="submit">Submit</button>
           </form>
+            <h1>Location: {this.state.locationData.display_name}</h1>
+            <p>Latitude: {this.state.locationData.lat}</p>
+            <p>longitude: {this.state.locationData.lon}</p>
         </main>
       </>
     )
