@@ -26,12 +26,32 @@
 
 ## Time Estimates
 
-Name of feature: 
+Name of feature: form
 
-Estimate of time needed to complete: 
+Estimate of time needed to complete: 15 mins
 
-Start time: 
+Start time: 6:00pm
 
-Finish time: 
+Finish time: 6:15pm
 
-Actual time needed to complete: 
+Actual time needed to complete: 15 minutes
+
+Name of feature: submit event handler
+
+Estimate of time needed to complete: 30 mins
+
+Start time: 6:30pm
+
+Finish time: 7:00
+
+Actual time needed to complete: 30 minutes
+
+Name of feature: async cityinfo api call func
+
+Estimate of time needed to complete: 30 mins
+
+Start time: 7:00pm
+
+Finish time: 8:15pm
+
+Actual time needed to complete: 75 minutes
