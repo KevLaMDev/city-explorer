@@ -8,22 +8,22 @@ class App extends React.Component {
     super(props);
     this.state = {
       userSearch: '',
-      locationData: {},
+      locationData: '',
       renderMap: false,
     };
   };
 
   handleSubmit = (e) => {
-    e.preventDefault();
-    let city = e.target.city.value;
+    let city = e.target.value;
     this.setState({
-      userSearch: e.target.city.value,
+      userSearch: city
     });
-    this.getCityInfo(city);
+    console.log(this.state.userSearch)
   };
 
-  getCityInfo = async (city) => {
-    let url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_ACCESS_TOKEN}&q=${city}&format=json`;
+  getCityInfo = async (e) => {
+    e.preventDefault();
+    let url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_ACCESS_TOKEN}&q=${this.state.userSearch}&format=json`;
     let responseData = await axios.get(url)
     this.setState({
       locationData: responseData.data[0]
@@ -36,9 +36,9 @@ class App extends React.Component {
       <>
         <Header title='City Explorers' subtitle='View a map of your favorite city in real time' />
         <main>
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={(e)=>this.getCityInfo(e)}>
             <label>Enter a City!
-              <input type="text" name="city"></input>
+              <input type="text" name="city" onInput={this.handleSubmit}></input>
             </label>
             <button type="submit">Submit</button>
           </form>

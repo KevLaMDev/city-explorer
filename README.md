@@ -1,7 +1,11 @@
 # City Explorer
 
 **Author**: Kevin LaMarca
-**Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
+**Version**: 1.0.2 
+
+## Instructions
+- clone down the repo
+- add in a .env file, and cp the code fro  .env.sample file, inserting your API token.
 
 ## Overview
 - This app is designed to take in a location via user input, make an API call requesting data on the location, and render a map of the user's selected location.
