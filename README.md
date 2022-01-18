@@ -23,7 +23,8 @@
 ![image](/public/dataFlow.png);
 
 ## Change Log
-
+- 1/17: Got state to update from the userInput: cb event handler is invoked upon keystoke and updates state in real time. GeoData API call working as intend, state gets updated with object from API.
+- 1/18: 
 
 ## Credit and Collaborations
 

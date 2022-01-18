@@ -36,8 +36,8 @@ class App extends React.Component {
       <>
         <Header title='City Explorers' subtitle='View a map of your favorite city in real time' />
         <main>
-          <form onSubmit={(e)=>this.getCityInfo(e)}>
-            <label>Enter a City!
+          <form onSubmit={this.getCityInfo}>
+            <label>Enter a City! 
               <input type="text" name="city" onInput={this.handleSubmit}></input>
             </label>
             <button type="submit">Submit</button>
