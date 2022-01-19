@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import Header from './Header';
+import Image from 'react-bootstrap/Image'
+import './App.css'
 
 
 class App extends React.Component {
@@ -10,6 +12,7 @@ class App extends React.Component {
       userSearch: '',
       locationData: '',
       renderMap: false,
+      mapUrl: '',
     };
   };
 
@@ -18,7 +21,6 @@ class App extends React.Component {
     this.setState({
       userSearch: city
     });
-    console.log(this.state.userSearch)
   };
 
   getCityInfo = async (e) => {
@@ -26,7 +28,11 @@ class App extends React.Component {
     let url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_ACCESS_TOKEN}&q=${this.state.userSearch}&format=json`;
     let responseData = await axios.get(url)
     this.setState({
-      locationData: responseData.data[0]
+      locationData: responseData.data[0],
+    })
+    console.log(this.state.locationData)
+    this.setState({
+      mapUrl:`https://maps.locationiq.com/v3/staticmap?key=pk.09705190e7b42d59adba58923c8dbfa4&center=${this.state.locationData.lat},${this.state.locationData.lon}&zoom=13`,
     })
   };
 
@@ -37,14 +43,17 @@ class App extends React.Component {
         <Header title='City Explorers' subtitle='View a map of your favorite city in real time' />
         <main>
           <form onSubmit={this.getCityInfo}>
-            <label>Enter a City! 
+            <label>Enter a City!
               <input type="text" name="city" onInput={this.handleSubmit}></input>
             </label>
             <button type="submit">Submit</button>
           </form>
-            <h1>Location: {this.state.locationData.display_name}</h1>
-            <p>Latitude: {this.state.locationData.lat}</p>
-            <p>longitude: {this.state.locationData.lon}</p>
+          <h1>Location: {this.state.locationData.display_name}</h1>
+          <p>Latitude: {this.state.locationData.lat}</p>
+          <p>longitude: {this.state.locationData.lon}</p>
+          <div>
+          <Image rounded={true} src={this.state.mapUrl}/>
+          </div>
         </main>
       </>
     )
