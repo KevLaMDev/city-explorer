@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Header from './Header';
-import Image from 'react-bootstrap/Image'
+import Card from 'react-bootstrap/Card'
 import './App.css'
 
 
@@ -13,6 +13,8 @@ class App extends React.Component {
       locationData: '',
       renderMap: false,
       mapUrl: '',
+      errorEvent: false,
+      errorMsg: '',
     };
   };
 
@@ -26,21 +28,33 @@ class App extends React.Component {
   getCityInfo = async (e) => {
     e.preventDefault();
     let url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_ACCESS_TOKEN}&q=${this.state.userSearch}&format=json`;
-    let responseData = await axios.get(url)
-    this.setState({
-      locationData: responseData.data[0],
-    })
-    console.log(this.state.locationData)
-    this.setState({
-      mapUrl:`https://maps.locationiq.com/v3/staticmap?key=pk.09705190e7b42d59adba58923c8dbfa4&center=${this.state.locationData.lat},${this.state.locationData.lon}&zoom=13`,
-    })
+    try {
+      let responseData = await axios.get(url)
+      this.setState({
+        locationData: responseData.data[0],
+      })
+      this.setState({
+        mapUrl: `https://maps.locationiq.com/v3/staticmap?key=pk.09705190e7b42d59adba58923c8dbfa4&center=${this.state.locationData.lat},${this.state.locationData.lon}&zoom=13`,
+        renderMap: true,
+      })
+    } catch (error) {
+      console.log(error)
+      this.setState({
+        errorEvent: true,
+        errorMsg: `Oops! Something went wrong: ${error}`
+      })
+    }
   };
 
 
   render() {
     return (
       <>
+      <body>
+      <div className="header">
         <Header title='City Explorers' subtitle='View a map of your favorite city in real time' />
+      </div>
+      <div className="main">
         <main>
           <form onSubmit={this.getCityInfo}>
             <label>Enter a City!
@@ -48,13 +62,35 @@ class App extends React.Component {
             </label>
             <button type="submit">Submit</button>
           </form>
-          <h1>Location: {this.state.locationData.display_name}</h1>
-          <p>Latitude: {this.state.locationData.lat}</p>
-          <p>longitude: {this.state.locationData.lon}</p>
-          <div>
-          <Image rounded={true} src={this.state.mapUrl}/>
+          <div className="map">
+            {
+              this.state.renderMap && <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" src={this.state.mapUrl} />
+                <Card.Body>
+                  <Card.Title>{this.state.locationData.display_name}</Card.Title>
+                  <Card.Text>
+                    <p>Latitude: {this.state.locationData.lat}</p>
+                    <p>longitude: {this.state.locationData.lon}</p>
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            }
+          </div>
+          <div className="errorMsg">
+            {
+              this.state.errorEvent && <Card style={{ width: '18rem' }}>
+                <Card.Body>
+                  <Card.Title>Ya dun goofed kiddo</Card.Title>
+                  <Card.Text>
+                    <p>{this.state.errorMsg}</p>
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            }
           </div>
         </main>
+        </div>
+        </body>
       </>
     )
   }
