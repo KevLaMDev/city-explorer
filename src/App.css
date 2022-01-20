@@ -18,7 +18,7 @@ body {
   padding: .5%;
 }
 
-.forecasts {
+.listItem {
   background-color: lightgrey;
   max-width: fit-content;
   display:inline-block;
