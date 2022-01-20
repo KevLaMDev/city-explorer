@@ -40,7 +40,7 @@ class App extends React.Component {
         mapUrl: `https://maps.locationiq.com/v3/staticmap?key=pk.09705190e7b42d59adba58923c8dbfa4&center=${this.state.locationData.lat},${this.state.locationData.lon}&zoom=13`,
         renderMap: true,
       })
-      let serverUrl = `${process.env.REACT_APP_SERVER_URL}/weather?searchQuery=${this.state.userSearch}&lat=${this.state.locationData.lat}&lon=${this.state.locationData.lon}`;
+      let serverUrl = `https://city-explorers-api-kevdev.herokuapp.com/weather?searchQuery=${this.state.userSearch}&lat=${this.state.locationData.lat}&lon=${this.state.locationData.lon}`;
       let weatherData = await axios.get(serverUrl);
       console.log(weatherData)
       this.setState({
