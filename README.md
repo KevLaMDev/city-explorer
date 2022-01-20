@@ -79,3 +79,23 @@ Start time: 8:30pm
 Finish time: 9:00pm
 
 Actual time needed to complete: 30 minutes
+
+Name of feature: Pull in weather data from server 
+
+Estimate of time needed to complete: 30 mins
+
+Start time: 8:30pm
+
+Finish time: 9:00pm
+
+Actual time needed to complete: 30 minutes
+
+Name of feature: Render weather data from server 
+
+Estimate of time needed to complete: 30 mins
+
+Start time: 9:30pm
+
+Finish time: 10:00pm
+
+Actual time needed to complete: 30 minutes
