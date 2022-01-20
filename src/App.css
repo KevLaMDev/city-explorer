@@ -15,4 +15,14 @@ body {
 .map {
   background-color: lightgrey;
   max-width: fit-content;
+  padding: .5%;
+}
+
+.forecasts {
+  background-color: lightgrey;
+  max-width: fit-content;
+  display:inline-block;
+  margin-top: .5%;
+  margin-right: .5%;
+  padding: .5%;
 }
