@@ -119,3 +119,23 @@ Start time: 8:20pm
 Finish time: 6:40pm
 
 Actual time needed to complete: 10 minutes
+
+Name of feature: make a subcomponent of Weather.js to render single days
+
+Estimate of time needed to complete: 30 mins
+
+Start time: 2:00am
+
+Finish time: 2:30am
+
+Actual time needed to complete: 30 minutes
+
+Name of feature: make a subcomponent of Movies.js to render single movies
+
+Estimate of time needed to complete: 30 mins
+
+Start time: 2:30am
+
+Finish time: 2:30am
+
+Actual time needed to complete: 30 minutes

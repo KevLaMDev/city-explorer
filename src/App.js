@@ -4,7 +4,7 @@ import Header from './Header';
 import Card from 'react-bootstrap/Card';
 import './App.css';
 import Weather from './Weather.js';
-import Movies from './Movies';
+import Movies from './Movies.js';
 
 
 
@@ -53,8 +53,6 @@ class App extends React.Component {
         movieData: movieData.data,
         renderMovies: true,
       })
-      console.log(this.state.movieData)
-      console.log(`boolean render: ${this.state.renderMovies}`)
       // request weather data from server
       let serverUrl = `${process.env.REACT_APP_SERVER_URL}/weather?lat=${this.state.locationData.lat}&lon=${this.state.locationData.lon}`;
       let weatherData = await axios.get(serverUrl);
@@ -73,7 +71,6 @@ class App extends React.Component {
 
 
   render() {
-
     return (
       <>
         <body>
@@ -101,34 +98,11 @@ class App extends React.Component {
               </Card>
               </div>
             }
-              {
-              this.state.renderMovies ? 
-                this.state.movieData.map(obj => {
-                  return (
-                    <div className="movie">
-                      <Movies 
-                        src={obj.image_url}
-                        title={obj.title}
-                        description={obj.overview}
-                      />
-                    </div>
-                  )
-                }) : null
-              }
             {
-              this.state.renderWeather ?
-                this.state.weatherData.map((obj, idx) => {
-                  return (
-                    <div className="listItem">
-                      <Weather
-                        date={obj.date}
-                        description={obj.description}
-                        temp={obj.temp}
-                        key={idx}
-                      />
-                    </div>
-                  )
-                }) : null
+              this.state.renderWeather && <Weather data={this.state.weatherData} />
+            }
+            {
+              this.state.renderMovies && <Movies data={this.state.movieData} />
             }
             {
               this.state.errorEvent && <div className="errorMsg"><Card style={{ width: '18rem' }}>
