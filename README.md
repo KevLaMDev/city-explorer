@@ -99,3 +99,23 @@ Start time: 9:30pm
 Finish time: 10:00pm
 
 Actual time needed to complete: 30 minutes
+
+Name of feature: add request for movie data after retrieving map data
+
+Estimate of time needed to complete: 10 mins
+
+Start time: 6:30pm
+
+Finish time: 6:40pm
+
+Actual time needed to complete: 10 minutes
+
+Name of feature: render retrived movie data from API
+
+Estimate of time needed to complete: 1 hr
+
+Start time: 8:20pm
+
+Finish time: 6:40pm
+
+Actual time needed to complete: 10 minutes

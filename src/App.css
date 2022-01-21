@@ -25,4 +25,9 @@ body {
   margin-top: .5%;
   margin-right: .5%;
   padding: .5%;
+};
+
+.movie {
+  display:flexbox;
+  background-color: lightgrey;
 }
