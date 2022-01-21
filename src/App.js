@@ -4,6 +4,8 @@ import Header from './Header';
 import Card from 'react-bootstrap/Card';
 import './App.css';
 import Weather from './Weather.js';
+import Carousel from 'react-bootstrap/Carousel';
+import Movies from './Movies';
 
 
 
@@ -19,6 +21,8 @@ class App extends React.Component {
       errorMsg: '',
       weatherData: [],
       renderWeather: false,
+      movieData: [],
+      renderMovies: false,
     };
   };
 
@@ -32,7 +36,9 @@ class App extends React.Component {
   getCityInfo = async (e) => {
     e.preventDefault();
     let locationIQUrl = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATIONIQ_ACCESS_TOKEN}&q=${this.state.userSearch}&format=json`;
+
     try {
+      // request map data from API
       let gpsData = await axios.get(locationIQUrl)
       this.setState({
         locationData: gpsData.data[0],
@@ -41,14 +47,22 @@ class App extends React.Component {
         mapUrl: `https://maps.locationiq.com/v3/staticmap?key=pk.09705190e7b42d59adba58923c8dbfa4&center=${this.state.locationData.lat},${this.state.locationData.lon}&zoom=13`,
         renderMap: true,
       })
+      // request movie data from server
+      let movieUrl = `${process.env.REACT_APP_SERVER_URL}/movies?location=${this.state.userSearch}`
+      let movieData = await axios.get(movieUrl);
+      this.setState({
+        movieData: movieData.data,
+        renderMovies: true,
+      })
+      console.log(this.state.movieData)
+      console.log(`boolean render: ${this.state.renderMovies}`)
+      // request weather data from server
       let serverUrl = `${process.env.REACT_APP_SERVER_URL}/weather?lat=${this.state.locationData.lat}&lon=${this.state.locationData.lon}`;
       let weatherData = await axios.get(serverUrl);
-      console.log(weatherData)
       this.setState({
         weatherData: weatherData.data,
         renderWeather: true
       });
-      console.log(this.state.weatherData)
     } catch (error) {
       console.log(error)
       this.setState({
@@ -88,6 +102,20 @@ class App extends React.Component {
               </Card>
               </div>
             }
+              {
+              this.state.renderMovies ? 
+                this.state.movieData.map(obj => {
+                  return (
+                    <div className="movie">
+                      <Movies 
+                        src={obj.image_url}
+                        title={obj.title}
+                        description={obj.overview}
+                      />
+                    </div>
+                  )
+                }) : null
+              }
             {
               this.state.renderWeather ?
                 this.state.weatherData.map((obj, idx) => {
