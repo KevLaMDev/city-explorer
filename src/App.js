@@ -4,7 +4,6 @@ import Header from './Header';
 import Card from 'react-bootstrap/Card';
 import './App.css';
 import Weather from './Weather.js';
-import Carousel from 'react-bootstrap/Carousel';
 import Movies from './Movies';
 
 
