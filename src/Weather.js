@@ -1,19 +1,22 @@
 import React from 'react'
-import ListGroup from 'react-bootstrap/ListGroup'
-
+import WeatherDay from './WeatherDay';
 
 class Weather extends React.Component {
 
   render() {
-    return (
-      <>
-        <ListGroup>
-          <ListGroup.Item>Day: {this.props.date}</ListGroup.Item>
-          <ListGroup.Item>Forecast: {this.props.description}</ListGroup.Item>
-          <ListGroup.Item>Temp: {this.props.temp}</ListGroup.Item>
-        </ListGroup>
-      </>
-    )
+    let forecasts = this.props.data.map((obj, idx) => {
+      return (
+      <div className="listItem">
+        <WeatherDay 
+          date={obj.date}
+          description={obj.description}
+          temp={obj.temp}
+          key={idx}
+        />
+      </div>
+      )
+    })
+    return forecasts
   }
 }
 
